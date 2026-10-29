@@ -6,6 +6,8 @@ This POC demonstrates how Sloth can be integrated with an existing Kubernetes mo
 
 Sloth is used to define SLOs and automatically generate monitoring and alerting rules. The generated rules are processed by the existing VictoriaMetrics monitoring components and alerts are displayed in Grafana.
 
+---
+
 ## 2. POC Objective
 
 - Integrate Sloth with the existing Kubernetes cluster.
@@ -13,6 +15,8 @@ Sloth is used to define SLOs and automatically generate monitoring and alerting 
 - Generate monitoring and alerting rules automatically.
 - Integrate generated rules with VictoriaMetrics.
 - Verify SLO alerts in Grafana.
+
+---
 
 ## 3. SLO Configuration
 
@@ -32,6 +36,8 @@ The POC was implemented for the following service:
 - **SLI:** The metric used to measure service performance. In this POC, API availability is measured using the existing `probe_success` metric.
 - **SLO:** The target availability level for the service. Here, the target is 99% over 30 days.
 - **Error Budget:** The allowed amount of failure within the SLO period. For a 99% SLO, the error budget is 1%.
+
+---
 
 ## 4. Implementation
 
@@ -75,23 +81,9 @@ When an alert condition is met, the alert becomes active and can be viewed in Gr
 
 ## 5. Architecture Flow
 
-Sloth CRD  
-→ SLO YAML  
-→ Sloth Controller  
-→ PrometheusRule  
-→ VictoriaMetrics Operator  
-→ VMRule  
-→ VMAlert  
-→ Grafana
+<img width="1774" height="887" alt="image" src="https://github.com/user-attachments/assets/c1fd0056-791f-4ee7-8e5a-5844b33e02c4" />
 
-### Flow Explanation
-
-- **Sloth CRD:** Enables SLO resources in Kubernetes.
-- **SLO YAML:** Defines the service-level objective.
-- **Sloth Controller:** Reads the configuration and generates rules.
-- **VictoriaMetrics Operator:** Integrates the generated rules into the existing monitoring setup.
-- **VMAlert:** Evaluates the rules and alert conditions.
-- **Grafana:** Displays the SLO-related alerts.
+---
 
 ## 6. Outcome
 
@@ -102,3 +94,5 @@ SLOs were defined using YAML, and Sloth generated the required monitoring and al
 The generated rules were integrated with the existing VictoriaMetrics setup, and SLO alerts were verified in Grafana.
 
 VMAlert evaluates the rules and alert conditions, while Grafana displays the SLO-related alerts.
+
+---
